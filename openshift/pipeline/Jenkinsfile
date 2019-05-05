@@ -1,0 +1,8 @@
+node('nodejs') {
+  stage 'build'
+  openshiftBuild(buildConfig: 'nodejs-ex', showBuildLogs: 'true')
+  stage 'test'
+  sh 'npm test'
+  stage 'deploy'
+  openshiftDeploy(deploymentConfig: 'nodejs-ex')
+}
