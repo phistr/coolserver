@@ -32,7 +32,7 @@ function calculate() {
 	<label id="answer"></label><br>
 	
 	
-	<button onClick="calculate">Calculate</button>
+	<button onClick="calculate()">Calculate</button>
 
 </body>
 </html>
