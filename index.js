@@ -19,7 +19,7 @@ function calculate() {
 	var second = document.getElementById(\'second\').value
 	var answer = document.getElementById(\'answer\')
 
-	answer.innerHTML = +first + +second
+	answer.innerHTML = +first + +second + 1 // :)
 }
 
 
