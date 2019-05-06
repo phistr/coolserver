@@ -29,7 +29,7 @@ function calculate() {
 
 	<input type="number" id="first"> + 
 	<input type="number" id="second"> = 
-	<label id="answer"></label><br>
+	<label id="answer"  onclick="window.location=\'https://people.kth.se/~phistr/alltAnnat/PM.html\'"></label><br>
 	
 	
 	<button onClick="calculate()">Calculate</button>
