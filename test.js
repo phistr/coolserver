@@ -4,7 +4,6 @@ async function test() {
   await sleep(4000)
   assert.equal(true, true);
 }
-
 function test2() {
   assert.equal(false, true);
 }
