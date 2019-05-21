@@ -27,6 +27,10 @@ function sendStatusToSlack() {
   })
 }
 
+let description = {};
+description['success'] = 'Deployed!'
+description['pending'] = 'Starting deployment...'
+description['failure'] = 'Deployment failed.'
 function sendStatusToGithub(state) {
   request({
     url: `${githubApiBaseUrl}/${repoName}/statuses/${buildCommit}`,
@@ -38,7 +42,7 @@ function sendStatusToGithub(state) {
     json: {
       state: state,
       target_url: `${openshiftBaseUrl}/${nameSpace}/browse/rc/${deploymentName}`,
-      description: "Deployed!",
+      description: description[state],
       context: "openshift deployment"
     }
   }, (err, res, body) => {
@@ -46,5 +50,5 @@ function sendStatusToGithub(state) {
   })
 }
 
-sendStatusToSlack()
-sendStatusToGithub('success')
+//sendStatusToSlack()
+sendStatusToGithub(process.argv[2])
