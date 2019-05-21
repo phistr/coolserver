@@ -11,21 +11,7 @@ const deploymentName = hostname.slice(0, hostname.indexOf('-', hostname.indexOf(
 const repoName = buildSrc.slice(buildSrc.indexOf('.com') + 5)
 const openshiftBaseUrl = "https://192.168.42.146:8443/console/project"
 const githubApiBaseUrl = "https://api.github.com/repos"
-console.log(deploymentName)
-
-let sucDep = `${buildName} deployed successfully in ${nameSpace}\n\n${buildSrc}\nbuild commit: ${buildCommit}`
-
-function sendStatusToSlack() {
-  request({
-    url: process.env.WEBHOOK_SERVICE_URL,
-    method: 'POST',
-    json: {
-      text: sucDep
-    }
-  }, (err, res, body) => {
-    console.log(res)
-  })
-}
+const deployURL = `${openshiftBaseUrl}/${nameSpace}/browse/rc/${deploymentName}`
 
 let description = {};
 description['success'] = 'Deployed!'
@@ -41,7 +27,7 @@ function sendStatusToGithub(state) {
     },
     json: {
       state: state,
-      target_url: `${openshiftBaseUrl}/${nameSpace}/browse/rc/${deploymentName}`,
+      target_url: deployURL,
       description: description[state],
       context: "openshift deployment"
     }
@@ -50,5 +36,14 @@ function sendStatusToGithub(state) {
   })
 }
 
-//sendStatusToSlack()
+function sendStatusToServer(st) {
+  let surl = `${process.env.OUR_SERVER_URL}/?state=${st}&sha=${buildCommit}&namespace=${nameSpace}`
+        + `&buildName=${buildName}&deployURL=${deployURL}&buildURL=${buildSrc}`
+  console.log(surl)
+  http.get(url.parse(surl, true), (resp) => {
+    console.log("sent get request")
+  })
+}
+
 sendStatusToGithub(process.argv[2])
+sendStatusToServer(process.argv[2])
