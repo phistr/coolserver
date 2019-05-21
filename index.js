@@ -36,7 +36,6 @@ function calculate() {
 
 </body>
 </html>
-
 	`;
   res.send(html)})
 
