@@ -4,7 +4,7 @@ const request = require('request')
 
 const buildName = process.env.OPENSHIFT_BUILD_NAME
 const nameSpace = process.env.OPENSHIFT_BUILD_NAMESPACE
-const buildSrc = process.env.OPENSHIFT_BUILD_SOURCE.slice(0, -4)
+const buildSrc = process.env.OPENSHIFT_BUILD_SOURCE
 const buildCommit = process.env.OPENSHIFT_BUILD_COMMIT
 const hostname = process.env.HOSTNAME
 const deploymentName = hostname.slice(0, hostname.indexOf('-', hostname.indexOf('-') + 1))
