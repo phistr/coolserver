@@ -9,7 +9,7 @@ function test2() {
 }
 
 async function sleep(msec) {
-        return new Promise(resolve => setTimeout(resolve, msec));
+  return new Promise(resolve => setTimeout(resolve, msec));
 }
 test()
 //test2()
