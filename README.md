@@ -1,1 +1,1 @@
-# coolserver
+# hotserver
